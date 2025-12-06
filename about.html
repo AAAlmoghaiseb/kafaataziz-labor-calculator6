@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>عن الحاسبة – كفاءات عبدالعزيز</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --seec-green: #0b5d3b;
+            --seec-green-soft: #e5f4ee;
+            --seec-gold: #c9a646;
+        }
+
+        body {
+            background-color: #f8faf9;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--seec-green) 0%, #107452 100%);
+        }
+
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #fff !important;
+        }
+
+        .page-header {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .sub-heading {
+            font-size: 0.95rem;
+            color: #e4f4ef;
+        }
+
+        .section-card {
+            border-radius: 18px;
+            border: 1px solid #dde5e0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            background-color: #ffffff;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--seec-green);
+            margin-bottom: 0.75rem;
+        }
+
+        .badge-soft {
+            background-color: var(--seec-green-soft);
+            color: var(--seec-green);
+            border-radius: 999px;
+            padding: 0.25rem 0.7rem;
+            font-size: 0.75rem;
+        }
+
+        .timeline-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--seec-gold);
+        }
+
+        .list-check li::marker {
+            content: "✓ ";
+            color: var(--seec-green);
+            font-weight: bold;
+        }
+
+        .btn-seec {
+            background-color: var(--seec-green);
+            color: #fff;
+            border-radius: 999px;
+            border: none;
+        }
+
+        .btn-seec:hover {
+            background-color: #07432a;
+            color: #fff;
+        }
+
+        .rating-btn {
+            border-radius: 999px;
+            font-size: 1.2rem;
+            padding: 0.5rem 1rem;
+        }
+
+        .rating-btn.active {
+            background-color: var(--seec-green);
+            color: white;
+            border-color: var(--seec-green);
+        }
+    </style>
+</head>
+<body>
+
+<!-- شريط علوي -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">
+            حاسبة مكافأة نهاية الخدمة – كفاءات عبدالعزيز
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">الحاسبة</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="stats.html">الإحصائيات</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">عن الأداة</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="feedback.html">التقييمات</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="bg-success" style="background: linear-gradient(90deg, var(--seec-green) 0%, #107452 100%);">
+    <div class="container py-3">
+        <div class="page-header">
+            <h1>عن حاسبة مكافأة نهاية الخدمة</h1>
+            <p class="sub-heading mb-0">
+                توضح هذه الصفحة فكرة الأداة، طريقة الاحتساب، آلية حفظ البيانات، وربطها بأولويات التحول الرقمي وفق ITIL.
+            </p>
+        </div>
+    </div>
+</header>
+
+<div class="container my-4">
+
+    <!-- عن الأداة -->
+    <section class="mb-4">
+        <div class="section-card p-4">
+            <h2 class="section-title"><i class="fa-solid fa-lightbulb"></i> فكرة الحاسبة وهدفها</h2>
+            <p class="mb-2">
+                تم تطوير حاسبة مكافأة نهاية الخدمة لمساعدة موظفي الموارد البشرية والموظفين على تقدير مكافأة نهاية الخدمة
+                وبعض الاستحقاقات ذات العلاقة (مثل تعويض الإجازة السنوية) بطريقة سريعة وشفافة، مع واجهة عربية مبسطة
+                ومناسبة للاستخدام داخل الجهات الحكومية أو القطاع الخاص.
+            </p>
+            <p class="mb-0 text-muted">
+                الأداة موجهة لأغراض التوعية والدعم التشغيلي، ولا تُعد مرجعاً قانونياً أو بديلاً عن الاستشارة النظامية المتخصصة.
+            </p>
+        </div>
+    </section>
+
+    <!-- منطق الاحتساب -->
+    <section class="mb-4">
+        <div class="section-card p-4">
+            <h2 class="section-title"><i class="fa-solid fa-calculator"></i> منطق الاحتساب (مبسّط لنظام العمل السعودي)</h2>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <span class="badge-soft mb-2 d-inline-block">المادة 84 – مكافأة نهاية الخدمة الأساسية</span>
+                    <ul class="list-check mb-3">
+                        <li>يتم احتساب <strong>نصف أجر شهري</strong> عن كل سنة من سنوات الخدمة خلال أول خمس سنوات.</li>
+                        <li>يتم احتساب <strong>أجر شهري كامل</strong> عن كل سنة لاحقة بعد السنة الخامسة.</li>
+                        <li>يمكن إدخال كسور السنة (مثل 5.5 سنة) ويتم تحويلها إلى قيمة نسبية.</li>
+                        <li>يمكن حساب مدة الخدمة تلقائياً من تاريخ البداية وآخر يوم في العمل.</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <span class="badge-soft mb-2 d-inline-block">المادة 85 – الاستقالة</span>
+                    <ul class="list-check mb-3">
+                        <li>أقل من سنتين خدمة: لا يستحق العامل مكافأة نهاية خدمة في حالة الاستقالة.</li>
+                        <li>من سنتين إلى أقل من خمس سنوات: يستحق <strong>ثلث</strong> المكافأة.</li>
+                        <li>من خمس إلى أقل من عشر سنوات: يستحق <strong>ثلثي</strong> المكافأة.</li>
+                        <li>عشر سنوات فأكثر: يستحق <strong>كامل</strong> المكافأة.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr>
+
+            <span class="badge-soft mb-2 d-inline-block">تعويض الإجازة السنوية (اختياري)</span>
+            <p class="mb-1">
+                إن تم إدخال عدد أيام الإجازة المستحقة، يتم احتساب تعويض الإجازة على أساس:
+            </p>
+            <ul class="list-check">
+                <li>الأجر اليومي = الأجر الشهري ÷ 30.</li>
+                <li>تعويض الإجازة = الأجر اليومي × عدد الأيام المستحقة.</li>
+            </ul>
+
+            <hr>
+
+            <span class="badge-soft mb-2 d-inline-block">المادة 87 – معاملة خاصة حسب الجنسية</span>
+            <p class="mb-1">
+                قد تكون هناك معاملات مختلفة حسب جنسية الموظف (سعودي / غير سعودي). الحاسبة تدعم هذا التمييز:
+            </p>
+            <ul class="list-check">
+                <li>تحديد جنسية الموظف (سعودي / غير سعودي) يؤثر على تطبيق الأحكام القانونية.</li>
+                <li>نوع العقد (محدد المدة / غير محدد المدة) قد يؤثر على الاستحقاقات.</li>
+                <li>يتم حفظ هذه المعلومات في السجل والإحصائيات للمراجعة والتدقيق.</li>
+            </ul>
+
+            <hr>
+
+            <span class="badge-soft mb-2 d-inline-block">الأجر بعد حسم التأمينات</span>
+            <p class="mb-1">
+                يمكن إدخال مبلغ حسم التأمينات الاجتماعية، ويتم حساب الأجر بعد الخصم تلقائياً:
+            </p>
+            <ul class="list-check">
+                <li>الأجر بعد التأمينات = (الراتب الأساسي + البدلات) - حسم التأمينات.</li>
+                <li>يظهر هذا المبلغ في النتائج والسجل للمراجعة.</li>
+            </ul>
+
+            <p class="mt-3 text-muted mb-0">
+                تم تطبيق هذا المنطق في صفحة <a href="index.html">الحاسبة</a>، ويظهر إجمالي الاستحقاق بالإضافة إلى
+                تفاصيل الاحتساب ضمن قسم "النتائج الحالية".
+            </p>
+        </div>
+    </section>
+
+    <!-- LocalStorage والخصوصية -->
+    <section class="mb-4">
+        <div class="section-card p-4">
+            <h2 class="section-title"><i class="fa-solid fa-shield-halved"></i> الخصوصية وآلية حفظ البيانات</h2>
+
+            <p class="mb-2">
+                حرصاً على الخصوصية، لا تقوم الحاسبة بإرسال أي بيانات إلى خوادم خارجية. يتم تخزين السجل في متصفح المستخدم فقط
+                باستخدام تقنية <strong>LocalStorage</strong>.
+            </p>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <ul class="list-check mb-3">
+                        <li>اسم المفتاح المستخدم في LocalStorage هو:
+                            <code>kafaatazizHistory</code>.
+                        </li>
+                        <li>لكل عملية يتم حفظ العناصر التالية بشكل مبسط:
+                            <ul class="mb-1">
+                                <li>اسم الموظف، جهة العمل، جنسية الموظف.</li>
+                                <li>الأجر الشهري (أساسي + بدلات)، مدة الخدمة.</li>
+                                <li>مكافأة نهاية الخدمة، تعويض الإجازة، الإجمالي الكلي.</li>
+                                <li>تاريخ ووقت تنفيذ العملية.</li>
+                            </ul>
+                        </li>
+                        <li>يمكن للمستخدم حذف السجل بالكامل من صفحة الحاسبة بنقرة واحدة.</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-1">
+                        تستخدم صفحة <a href="stats.html">لوحة الإحصائيات</a> هذا السجل لعرض مؤشرات مثل:
+                    </p>
+                    <ul class="list-check mb-0">
+                        <li>عدد العمليات المحفوظة.</li>
+                        <li>مجموع مكافآت نهاية الخدمة.</li>
+                        <li>متوسط مدد الخدمة.</li>
+                        <li>أعلى أجر شهري، و توزيعات حسب جنسية الموظف ونوع العقد وجهة العمل.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ربط الأداة بأولويات التحول الرقمي و ITIL -->
+    <section class="mb-4">
+        <div class="section-card p-4">
+            <h2 class="section-title"><i class="fa-solid fa-diagram-project"></i> ربط الحاسبة بأولويات التحول الرقمي (ITIL)</h2>
+
+            <p class="mb-3">
+                تم تصميم الحاسبة بحيث تتوافق مع مبادئ <strong>ITIL 4</strong> وأولويات التحول الرقمي في بيئة الموارد البشرية، وذلك عبر:
+            </p>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <span class="badge-soft mb-2 d-inline-block">1) SVS & Value Streams</span>
+                    <ul class="list-check mb-3">
+                        <li>اعتبار الحاسبة جزءاً من "قيمة" مقدمة للموظف والموارد البشرية ضمن سلسلة خدمات رقمية.</li>
+                        <li>وضوح بداية ونهاية رحلة الخدمة: من إدخال البيانات وحتى الحصول على تقرير قابل للطباعة.</li>
+                    </ul>
+
+                    <span class="badge-soft mb-2 d-inline-block">2) Four Dimensions</span>
+                    <ul class="list-check mb-3">
+                        <li><strong>الأشخاص والمنظمة:</strong> تم تصميم الواجهة لتناسب غير الفنيين في الموارد البشرية.</li>
+                        <li><strong>المعلومات والتقنية:</strong> استخدام LocalStorage وإحصائيات واضحة لتمكين اتخاذ القرار.</li>
+                        <li><strong>الشركاء والموردين:</strong> إمكانية دمج الحاسبة مستقبلاً مع أنظمة الموارد البشرية الداخلية.</li>
+                        <li><strong>التدفقات والقيمة:</strong> أتمتة عملية الاحتساب بدلاً من الجداول اليدوية.</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6">
+                    <span class="badge-soft mb-2 d-inline-block">3) Change Enablement & Continual Improvement</span>
+                    <ul class="list-check mb-3">
+                        <li>إتاحة تعديل منطق الاحتساب بسهولة عند تحديث الأنظمة أو السياسات.</li>
+                        <li>استخدام الإحصائيات لمعرفة أكثر السيناريوهات شيوعاً وتحسين الحاسبة بناءً عليها.</li>
+                    </ul>
+
+                    <span class="badge-soft mb-2 d-inline-block">4) Service Level & Information Security</span>
+                    <ul class="list-check mb-3">
+                        <li>تجربة سريعة وبسيطة ترفع مستوى الخدمة لموظفي الموارد البشرية.</li>
+                        <li>حماية البيانات بحصرها داخل متصفح المستخدم وعدم إرسالها لخوادم خارجية.</li>
+                    </ul>
+
+                    <span class="badge-soft mb-2 d-inline-block">5) Incident / Problem (Awareness)</span>
+                    <ul class="list-check mb-0">
+                        <li>في حال ظهور مشكلة في النتائج، يمكن التعامل معها كـ Incident وتحليل السبب كـ Problem
+                            (مثل تغيير في النظام، أو معادلات غير محدثة).
+                        </li>
+                        <li>يساعد توثيق منطق الاحتساب في هذه الصفحة على تسهيل التحقيق وحل المشكلات.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- سجل التحسينات والخارطة الطريق -->
+    <section class="mb-4">
+        <div class="section-card p-4">
+            <h2 class="section-title"><i class="fa-solid fa-chart-line"></i> سجل التحسينات والخارطة الطريق</h2>
+            
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <span class="badge-soft mb-2 d-inline-block">سجل التحديثات السابقة</span>
+                    <ul class="list-check mb-3">
+                        <li><strong>الإصدار 1.0 (ديسمبر 2024):</strong> إطلاق النسخة الأولى من الحاسبة مع دعم المادة 84 والمادة 85.</li>
+                        <li><strong>الإصدار 1.1 (ديسمبر 2024):</strong> إضافة صفحة الإحصائيات وتحسين واجهة المستخدم.</li>
+                        <li><strong>الإصدار 1.2 (ديسمبر 2024):</strong> تحديث تسمية "نوع الموظف" إلى "جنسية الموظف" وتبسيط الخيارات.</li>
+                        <li><strong>الإصدار 1.3 (ديسمبر 2024):</strong> إضافة حقول جديدة: نوع العقد، تواريخ العمل، حسم التأمينات، والأجر بعد الخصم. مع تطبيق المادة 87 للمعاملات الخاصة حسب الجنسية.</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <span class="badge-soft mb-2 d-inline-block">الميزات المستقبلية المخطط لها</span>
+                    <ul class="list-check mb-0">
+                        <li>🔄 مراجعة وتحديث منطق الاحتساب بناءً على المادة 87 والاستثناءات القانونية.</li>
+                        <li>🔄 تحسين نموذج جمع الملاحظات والتقييمات من المستخدمين.</li>
+                        <li>📊 إضافة رسوم بيانية متقدمة في صفحة الإحصائيات.</li>
+                        <li>🔗 دمج الحاسبة مع أنظمة الموارد البشرية الخارجية (API).</li>
+                        <li>📱 تحسين الأداء على الأجهزة المحمولة.</li>
+                        <li>🌐 دعم لغات إضافية.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- نموذج الملاحظات والتقييم -->
+    <section class="mb-4">
+        <div class="section-card p-4">
+            <h2 class="section-title"><i class="fa-solid fa-star"></i> نموذج الملاحظات والتقييم</h2>
+            <p class="mb-3">
+                رأيك مهم جداً! يساعدنا تقييمك وملاحظاتك على تحسين الحاسبة بشكل مستمر. يرجى ملء النموذج أدناه:
+            </p>
+
+            <form id="feedbackForm" class="row g-3">
+                <div class="col-12">
+                    <label for="feedbackRating" class="form-label">كيف تقيّم الحاسبة بشكل عام؟</label>
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-outline-secondary rating-btn" data-rating="1" title="سيء جداً">😞 1</button>
+                        <button type="button" class="btn btn-outline-secondary rating-btn" data-rating="2" title="سيء">😕 2</button>
+                        <button type="button" class="btn btn-outline-secondary rating-btn" data-rating="3" title="متوسط">😐 3</button>
+                        <button type="button" class="btn btn-outline-secondary rating-btn" data-rating="4" title="جيد">🙂 4</button>
+                        <button type="button" class="btn btn-outline-secondary rating-btn" data-rating="5" title="ممتاز">😄 5</button>
+                    </div>
+                    <input type="hidden" id="feedbackRating" name="rating" value="">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="feedbackName" class="form-label">اسمك (اختياري)</label>
+                    <input type="text" id="feedbackName" class="form-control" placeholder="مثال: أحمد محمد">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="feedbackEmail" class="form-label">بريدك الإلكتروني (اختياري)</label>
+                    <input type="email" id="feedbackEmail" class="form-control" placeholder="مثال: user@example.com">
+                </div>
+
+                <div class="col-12">
+                    <label for="feedbackType" class="form-label">نوع الملاحظة</label>
+                    <select id="feedbackType" class="form-select">
+                        <option value="" selected disabled>اختر نوع الملاحظة</option>
+                        <option value="اقتراح">اقتراح لتحسين</option>
+                        <option value="مشكلة">مشكلة أو خطأ</option>
+                        <option value="سؤال">سؤال أو استفسار</option>
+                        <option value="إشادة">إشادة أو تقدير</option>
+                    </select>
+                </div>
+
+                <div class="col-12">
+                    <label for="feedbackMessage" class="form-label">ملاحظاتك</label>
+                    <textarea id="feedbackMessage" class="form-control" rows="4" placeholder="شارك معنا ملاحظاتك أو اقتراحاتك..."></textarea>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-seec">
+                        <i class="fa-solid fa-paper-plane"></i> إرسال الملاحظة
+                    </button>
+                    <small class="text-muted d-block mt-2">
+                        ملاحظة: يتم حفظ الملاحظات في متصفحك محلياً ولا تُرسل إلى خوادم خارجية.
+                    </small>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- التواصل -->
+    <section class="mb-4">
+        <div class="section-card p-4">
+            <h2 class="section-title"><i class="fa-solid fa-envelope-open-text"></i> التواصل والدعم</h2>
+            <p class="mb-3">
+                لأي ملاحظات أو اقتراحات أو دعم فني متعلق بالحاسبة، يمكن التواصل عبر القنوات التالية:
+            </p>
+
+            <ul class="list-unstyled mb-0">
+                <li class="mb-2">
+                    <i class="fa-solid fa-envelope text-success me-1"></i>
+                    البريد الإلكتروني:
+                    <a href="mailto:hr@kafaat-abdulaziz.com">hr@kafaat-abdulaziz.com</a>
+                </li>
+                <li class="mb-2">
+                    <i class="fa-solid fa-phone text-success me-1"></i>
+                    الهاتف:
+                    <strong>050 3414453</strong>
+                </li>
+                <li class="mb-0">
+                    <i class="fa-solid fa-location-dot text-success me-1"></i>
+                    المقر:
+                    الرياض – المدينة الرقمية – المملكة العربية السعودية
+                </li>
+            </ul>
+        </div>
+    </section>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // معالجة نموذج الملاحظات والتقييم
+    const FEEDBACK_KEY = 'kafaatazizFeedback';
+
+    // معالجة أزرار التقييم
+    document.querySelectorAll('.rating-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            document.getElementById('feedbackRating').value = this.dataset.rating;
+        });
+    });
+
+    // معالجة إرسال النموذج
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const feedback = {
+            rating: document.getElementById('feedbackRating').value,
+            name: document.getElementById('feedbackName').value.trim() || 'غير محدد',
+            email: document.getElementById('feedbackEmail').value.trim() || 'غير محدد',
+            type: document.getElementById('feedbackType').value,
+            message: document.getElementById('feedbackMessage').value.trim(),
+            createdAt: new Date().toISOString()
+        };
+
+        if (!feedback.type || !feedback.message) {
+            alert('الرجاء ملء نوع الملاحظة والملاحظات على الأقل.');
+            return;
+        }
+
+        // حفظ الملاحظة في LocalStorage
+        let feedbackList = [];
+        try {
+            const raw = localStorage.getItem(FEEDBACK_KEY);
+            if (raw) feedbackList = JSON.parse(raw);
+        } catch (e) {
+            console.error('خطأ في قراءة الملاحظات:', e);
+        }
+
+        feedbackList.push(feedback);
+        localStorage.setItem(FEEDBACK_KEY, JSON.stringify(feedbackList));
+
+        // إعادة تعيين النموذج
+        this.reset();
+        document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('feedbackRating').value = '';
+
+        alert('شكراً لك! تم حفظ ملاحظتك بنجاح. سنعمل على تحسين الحاسبة بناءً على آرائكم.');
+    });
+</script>
+
+</body>
+</html>

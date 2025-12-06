@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>التقييمات والملاحظات – كفاءات عبدالعزيز</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <style>
+        :root {
+            --seec-green: #0b5d3b;
+            --seec-green-soft: #e5f4ee;
+            --seec-gold: #c9a646;
+            --seec-gray: #f5f5f5;
+        }
+
+        body {
+            background-color: #f8faf9;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--seec-green) 0%, #107452 100%);
+        }
+
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #fff !important;
+        }
+
+        .page-header {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .sub-heading {
+            font-size: 0.95rem;
+            color: #e4f4ef;
+        }
+
+        .metric-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #dde5e0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            padding: 1.2rem 1.4rem;
+            height: 100%;
+        }
+
+        .metric-label {
+            font-size: 0.95rem;
+            color: #687578;
+        }
+
+        .metric-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--seec-green);
+        }
+
+        .metric-sub {
+            font-size: 0.8rem;
+            color: #9aa3a6;
+        }
+
+        .badge-soft {
+            background-color: var(--seec-green-soft);
+            color: var(--seec-green);
+            border-radius: 999px;
+            padding: 0.25rem 0.7rem;
+            font-size: 0.75rem;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--seec-green);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-card {
+            border-radius: 16px;
+            border: 1px solid #dde5e0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            background-color: #ffffff;
+        }
+
+        .table thead {
+            background-color: var(--seec-green-soft);
+        }
+
+        .table thead th {
+            color: var(--seec-green);
+            font-weight: 600;
+        }
+
+        .btn-seec {
+            background-color: var(--seec-green);
+            color: #fff;
+            border-radius: 999px;
+            border: none;
+        }
+
+        .btn-seec:hover {
+            background-color: #07432a;
+            color: #fff;
+        }
+
+        .btn-outline-seec {
+            border-radius: 999px;
+            border: 1px solid var(--seec-green);
+            color: var(--seec-green);
+            background-color: #fff;
+        }
+
+        .btn-outline-seec:hover {
+            background-color: var(--seec-green-soft);
+            color: var(--seec-green);
+        }
+
+        .rating-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .rating-1 { background-color: #f8d7da; color: #721c24; }
+        .rating-2 { background-color: #f5c6cb; color: #721c24; }
+        .rating-3 { background-color: #fff3cd; color: #856404; }
+        .rating-4 { background-color: #d1ecf1; color: #0c5460; }
+        .rating-5 { background-color: #d4edda; color: #155724; }
+
+        .feedback-card {
+            background-color: #f8faf9;
+            border-right: 4px solid var(--seec-green);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+        }
+
+        .empty-state {
+            padding: 2rem 1rem;
+            text-align: center;
+            color: #8a9497;
+        }
+
+        .small-hint {
+            font-size: 0.8rem;
+            color: #8a9497;
+        }
+
+        @media print {
+            nav, .no-print {
+                display: none !important;
+            }
+            body {
+                background: #fff;
+            }
+            .metric-card, .section-card {
+                box-shadow: none !important;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- شريط علوي -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">
+            حاسبة مكافأة نهاية الخدمة – كفاءات عبدالعزيز
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">الحاسبة</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="stats.html">الإحصائيات</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">عن الأداة</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active fw-semibold" aria-current="page" href="feedback.html">التقييمات</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- الرأس -->
+<header class="bg-success" style="background: linear-gradient(90deg, var(--seec-green) 0%, #107452 100%);">
+    <div class="container py-3">
+        <div class="page-header">
+            <h1>التقييمات والملاحظات</h1>
+            <p class="sub-heading mb-0">
+                عرض شامل لجميع التقييمات والملاحظات المحفوظة من المستخدمين.
+            </p>
+        </div>
+    </div>
+</header>
+
+<!-- المحتوى -->
+<div class="container my-4">
+
+    <!-- ملخص سريع -->
+    <section class="mb-4">
+        <div class="row g-3">
+            <div class="col-md-3 col-sm-6">
+                <div class="metric-card">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="metric-label">عدد التقييمات</span>
+                        <i class="fa-solid fa-star text-warning"></i>
+                    </div>
+                    <div class="metric-value" id="total-feedbacks">0</div>
+                    <div class="metric-sub">إجمالي التقييمات المحفوظة</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="metric-card">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="metric-label">متوسط التقييم</span>
+                        <i class="fa-solid fa-chart-line text-success"></i>
+                    </div>
+                    <div class="metric-value" id="avg-rating">0</div>
+                    <div class="metric-sub">من 5 نجوم</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="metric-card">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="metric-label">أعلى تقييم</span>
+                        <i class="fa-solid fa-arrow-up text-info"></i>
+                    </div>
+                    <div class="metric-value" id="max-rating">0</div>
+                    <div class="metric-sub">أفضل تقييم مُعطى</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="metric-card">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="metric-label">أقل تقييم</span>
+                        <i class="fa-solid fa-arrow-down text-danger"></i>
+                    </div>
+                    <div class="metric-value" id="min-rating">0</div>
+                    <div class="metric-sub">أقل تقييم مُعطى</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- في حال لا توجد بيانات -->
+    <section id="empty-state" class="empty-state d-none">
+        <i class="fa-regular fa-face-smile-beam fa-2x mb-2"></i>
+        <p class="mb-1">لا توجد حتى الآن أي تقييمات أو ملاحظات.</p>
+        <p class="mb-0">
+            جرّب الذهاب إلى صفحة <a href="about.html">عن الأداة</a> وإرسال تقييم أو ملاحظة.
+        </p>
+    </section>
+
+    <div id="feedback-content" class="d-none">
+
+        <!-- الإحصائيات والرسوم البيانية -->
+        <section class="mb-4">
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="section-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="section-title mb-0">توزيع التقييمات</span>
+                            <span class="badge-soft"><i class="fa-solid fa-chart-pie"></i> النسب المئوية</span>
+                        </div>
+                        <canvas id="ratingChart" height="200"></canvas>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="section-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="section-title mb-0">توزيع أنواع الملاحظات</span>
+                            <span class="badge-soft"><i class="fa-solid fa-chart-bar"></i> التصنيفات</span>
+                        </div>
+                        <canvas id="typeChart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- جدول التقييمات والملاحظات -->
+        <section class="mb-4">
+            <div class="section-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="section-title mb-0">جميع التقييمات والملاحظات</span>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-seec no-print" id="btn-export-csv">
+                            <i class="fa-solid fa-download"></i> تحميل CSV
+                        </button>
+                        <button class="btn btn-sm btn-outline-seec no-print" id="btn-refresh">
+                            <i class="fa-solid fa-rotate"></i> تحديث
+                        </button>
+                        <button class="btn btn-sm btn-seec no-print" onclick="window.print()">
+                            <i class="fa-solid fa-print"></i> طباعة
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>التقييم</th>
+                            <th>النوع</th>
+                            <th>الاسم</th>
+                            <th>البريد الإلكتروني</th>
+                            <th>الملاحظة</th>
+                            <th>التاريخ</th>
+                        </tr>
+                        </thead>
+                        <tbody id="feedback-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- عرض الملاحظات بشكل مفصل -->
+        <section class="mb-4">
+            <div class="section-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="section-title mb-0">الملاحظات المفصلة</span>
+                    <span class="badge-soft"><i class="fa-solid fa-list"></i> عرض تفصيلي</span>
+                </div>
+                <div id="detailed-feedback"></div>
+            </div>
+        </section>
+
+    </div>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const FEEDBACK_KEY = 'kafaatazizFeedback';
+    const QUICK_RATING_KEY = 'kafaatazizQuickRating';
+
+    function toNumber(value) {
+        const n = Number(value);
+        return isNaN(n) ? 0 : n;
+    }
+
+    function formatDate(value) {
+        if (!value) return '-';
+        const d = new Date(value);
+        if (isNaN(d.getTime())) return '-';
+        return d.toLocaleString('ar-SA');
+    }
+
+    function loadFeedback() {
+        try {
+            const raw = localStorage.getItem(FEEDBACK_KEY);
+            if (!raw) return [];
+            const parsed = JSON.parse(raw);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (e) {
+            console.error('خطأ في قراءة الملاحظات:', e);
+            return [];
+        }
+    }
+
+    function loadQuickRatings() {
+        try {
+            const raw = localStorage.getItem(QUICK_RATING_KEY);
+            if (!raw) return [];
+            const parsed = JSON.parse(raw);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (e) {
+            console.error('خطأ في قراءة التقييمات السريعة:', e);
+            return [];
+        }
+    }
+
+    function buildFeedbackStats() {
+        const feedbacks = loadFeedback();
+        const quickRatings = loadQuickRatings();
+        const allRatings = [
+            ...feedbacks.map(f => toNumber(f.rating)),
+            ...quickRatings.map(r => r.rating === 'helpful' ? 5 : (r.rating === 'notHelpful' ? 1 : 3))
+        ];
+
+        const emptyState = document.getElementById('empty-state');
+        const feedbackContent = document.getElementById('feedback-content');
+
+        if (!feedbacks.length && !quickRatings.length) {
+            emptyState.classList.remove('d-none');
+            feedbackContent.classList.add('d-none');
+            return;
+        }
+
+        emptyState.classList.add('d-none');
+        feedbackContent.classList.remove('d-none');
+
+        // 1) الملخص السريع
+        const totalFeedbacks = feedbacks.length + quickRatings.length;
+        const avgRating = allRatings.length ? (allRatings.reduce((a, b) => a + b, 0) / allRatings.length).toFixed(2) : 0;
+        const maxRating = allRatings.length ? Math.max(...allRatings) : 0;
+        const minRating = allRatings.length ? Math.min(...allRatings) : 0;
+
+        document.getElementById('total-feedbacks').textContent = totalFeedbacks;
+        document.getElementById('avg-rating').textContent = avgRating;
+        document.getElementById('max-rating').textContent = maxRating;
+        document.getElementById('min-rating').textContent = minRating;
+
+        // 2) توزيع التقييمات
+        const ratingCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+        allRatings.forEach(r => {
+            if (ratingCounts.hasOwnProperty(r)) ratingCounts[r]++;
+        });
+
+        const ctxRating = document.getElementById('ratingChart');
+        new Chart(ctxRating, {
+            type: 'doughnut',
+            data: {
+                labels: ['سيء جداً (1)', 'سيء (2)', 'متوسط (3)', 'جيد (4)', 'ممتاز (5)'],
+                datasets: [{
+                    data: [ratingCounts[1], ratingCounts[2], ratingCounts[3], ratingCounts[4], ratingCounts[5]],
+                    backgroundColor: ['#dc3545', '#fd7e14', '#ffc107', '#17a2b8', '#28a745']
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { family: 'system-ui' } }
+                    }
+                }
+            }
+        });
+
+        // 3) توزيع أنواع الملاحظات
+        const typeCounts = {};
+        feedbacks.forEach(f => {
+            const type = f.type || 'غير محدد';
+            typeCounts[type] = (typeCounts[type] || 0) + 1;
+        });
+
+        const typeLabels = Object.keys(typeCounts);
+        const typeValues = Object.values(typeCounts);
+
+        const ctxType = document.getElementById('typeChart');
+        new Chart(ctxType, {
+            type: 'bar',
+            data: {
+                labels: typeLabels,
+                datasets: [{
+                    label: 'عدد الملاحظات',
+                    data: typeValues,
+                    backgroundColor: '#0b5d3b'
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        ticks: { precision: 0 }
+                    }
+                }
+            }
+        });
+
+        // 4) جدول التقييمات
+        const feedbackTable = document.getElementById('feedback-table');
+        feedbackTable.innerHTML = '';
+
+        const allData = [
+            ...feedbacks.map((f, idx) => ({
+                ...f,
+                _index: idx + 1,
+                _type: 'feedback'
+            })),
+            ...quickRatings.map((r, idx) => ({
+                rating: r.rating === 'helpful' ? 5 : (r.rating === 'notHelpful' ? 1 : 3),
+                type: 'تقييم سريع',
+                name: '-',
+                email: '-',
+                message: r.rating === 'helpful' ? 'تقييم إيجابي' : (r.rating === 'notHelpful' ? 'تقييم سلبي' : 'ملاحظة'),
+                createdAt: r.timestamp,
+                _index: feedbacks.length + idx + 1,
+                _type: 'quick'
+            }))
+        ].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+        allData.forEach((item, idx) => {
+            const tr = document.createElement('tr');
+            const ratingClass = `rating-${item.rating || 0}`;
+            const ratingEmoji = {
+                1: '😞', 2: '😕', 3: '😐', 4: '🙂', 5: '😄'
+            }[item.rating] || '-';
+
+            tr.innerHTML = `
+                <td>${idx + 1}</td>
+                <td><span class="rating-badge ${ratingClass}">${ratingEmoji} ${item.rating || '-'}</span></td>
+                <td>${item.type || '-'}</td>
+                <td>${item.name || '-'}</td>
+                <td>${item.email || '-'}</td>
+                <td><small>${(item.message || '-').substring(0, 50)}${(item.message || '').length > 50 ? '...' : ''}</small></td>
+                <td><small>${formatDate(item.createdAt)}</small></td>
+            `;
+            feedbackTable.appendChild(tr);
+        });
+
+        // 5) الملاحظات المفصلة
+        const detailedFeedback = document.getElementById('detailed-feedback');
+        detailedFeedback.innerHTML = '';
+
+        feedbacks.forEach((f, idx) => {
+            const ratingClass = `rating-${f.rating || 0}`;
+            const ratingEmoji = { 1: '😞', 2: '😕', 3: '😐', 4: '🙂', 5: '😄' }[f.rating] || '-';
+
+            const card = document.createElement('div');
+            card.className = 'feedback-card';
+            card.innerHTML = `
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                        <span class="rating-badge ${ratingClass} me-2">${ratingEmoji} ${f.rating || '-'}</span>
+                        <span class="badge bg-info">${f.type || 'غير محدد'}</span>
+                    </div>
+                    <small class="text-muted">${formatDate(f.createdAt)}</small>
+                </div>
+                <p class="mb-2"><strong>${f.name || 'غير محدد'}</strong> ${f.email ? `(${f.email})` : ''}</p>
+                <p class="mb-0">${f.message || '-'}</p>
+            `;
+            detailedFeedback.appendChild(card);
+        });
+
+        if (!feedbacks.length) {
+            detailedFeedback.innerHTML = '<p class="text-muted text-center">لا توجد ملاحظات مفصلة (تقييمات سريعة فقط)</p>';
+        }
+    }
+
+    // تحميل البيانات كـ CSV
+    document.getElementById('btn-export-csv').addEventListener('click', function() {
+        const feedbacks = loadFeedback();
+        const quickRatings = loadQuickRatings();
+
+        let csv = 'التقييم,النوع,الاسم,البريد الإلكتروني,الملاحظة,التاريخ\n';
+
+        feedbacks.forEach(f => {
+            const rating = f.rating || '-';
+            const type = (f.type || '-').replace(/,/g, ';');
+            const name = (f.name || '-').replace(/,/g, ';');
+            const email = (f.email || '-').replace(/,/g, ';');
+            const message = (f.message || '-').replace(/,/g, ';').replace(/\n/g, ' ');
+            const date = formatDate(f.createdAt);
+
+            csv += `${rating},${type},${name},${email},"${message}",${date}\n`;
+        });
+
+        quickRatings.forEach(r => {
+            const rating = r.rating === 'helpful' ? 5 : (r.rating === 'notHelpful' ? 1 : 3);
+            const type = 'تقييم سريع';
+            const message = r.rating === 'helpful' ? 'تقييم إيجابي' : (r.rating === 'notHelpful' ? 'تقييم سلبي' : 'ملاحظة');
+            const date = formatDate(r.timestamp);
+
+            csv += `${rating},${type},-,-,"${message}",${date}\n`;
+        });
+
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', `feedback_${new Date().toISOString().split('T')[0]}.csv`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+
+    document.getElementById('btn-refresh').addEventListener('click', buildFeedbackStats);
+
+    // تحميل عند فتح الصفحة
+    buildFeedbackStats();
+</script>
+
+</body>
+</html>

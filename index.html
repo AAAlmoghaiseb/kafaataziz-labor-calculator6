@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>حاسبة مكافأة نهاية الخدمة – كفاءات عبدالعزيز</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --seec-green: #0b5d3b;
+            --seec-green-soft: #e5f4ee;
+            --seec-gold: #c9a646;
+            --seec-gray: #f5f5f5;
+        }
+
+        body {
+            background-color: #f8faf9;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--seec-green) 0%, #107452 100%);
+        }
+
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #fff !important;
+        }
+
+        .page-header {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .sub-heading {
+            font-size: 0.95rem;
+            color: #e4f4ef;
+        }
+
+        .card-section {
+            border-radius: 16px;
+            border: 1px solid #dde5e0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--seec-green);
+        }
+
+        .badge-soft {
+            background-color: var(--seec-green-soft);
+            color: var(--seec-green);
+            border-radius: 999px;
+            padding: 0.25rem 0.7rem;
+            font-size: 0.75rem;
+        }
+
+        .results-box {
+            background-color: var(--seec-green-soft);
+            border-radius: 16px;
+            padding: 1rem 1.25rem;
+        }
+
+        .results-box h3 {
+            font-size: 1.2rem;
+            color: var(--seec-green);
+            font-weight: 700;
+        }
+
+        .result-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--seec-green);
+        }
+
+        .btn-seec {
+            background-color: var(--seec-green);
+            color: #fff;
+            border-radius: 999px;
+            border: none;
+        }
+
+        .btn-seec:hover {
+            background-color: #07432a;
+            color: #fff;
+        }
+
+        .btn-outline-seec {
+            border-radius: 999px;
+            border: 1px solid var(--seec-green);
+            color: var(--seec-green);
+            background-color: #fff;
+        }
+
+        .btn-outline-seec:hover {
+            background-color: var(--seec-green-soft);
+            color: var(--seec-green);
+        }
+
+        .table thead {
+            background-color: var(--seec-green-soft);
+        }
+
+        .table thead th {
+            color: var(--seec-green);
+            font-weight: 600;
+        }
+
+        .small-hint {
+            font-size: 0.8rem;
+            color: #8a9497;
+        }
+
+        @media print {
+            nav, .no-print {
+                display: none !important;
+            }
+            body {
+                background: #fff;
+            }
+            .card, .results-box, .card-section {
+                box-shadow: none !important;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- شريط علوي -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">
+            حاسبة مكافأة نهاية الخدمة – كفاءات عبدالعزيز
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active fw-semibold" aria-current="page" href="index.html">الحاسبة</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="stats.html">الإحصائيات</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">عن الأداة</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="feedback.html">التقييمات</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- الرأس داخل الصفحة -->
+<header class="bg-success" style="background: linear-gradient(90deg, var(--seec-green) 0%, #107452 100%);">
+    <div class="container py-3">
+        <div class="page-header">
+            <h1>حاسبة تقديرية لمكافأة نهاية الخدمة</h1>
+            <p class="sub-heading mb-0">
+                تعتمد هذه الأداة على صيغة مبسطة لنظام العمل السعودي (المادة 84 و 85) لأغراض التقدير فقط، ولا تُعد مرجعاً قانونياً.
+            </p>
+        </div>
+    </div>
+</header>
+
+<!-- المحتوى الرئيسي -->
+<div class="container my-4">
+
+    <!-- نموذج الإدخال + النتائج -->
+    <div class="row g-4">
+        <!-- نموذج الحساب -->
+        <div class="col-lg-7">
+            <div class="card card-section">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="section-title">بيانات الحساب</span>
+                        <span class="badge-soft"><i class="fa-solid fa-circle-info"></i> الحقول الأساسية مطلوبة</span>
+                    </div>
+
+                    <form id="calculatorForm" class="row g-3">
+
+                        <!-- بيانات الموظف -->
+                        <div class="col-md-6">
+                            <label for="employeeName" class="form-label">اسم الموظف</label>
+                            <input type="text" id="employeeName" class="form-control" placeholder="مثال: أحمد محمد">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="employerName" class="form-label">اسم جهة العمل</label>
+                            <input type="text" id="employerName" class="form-control" placeholder="مثال: كفاءات عبدالعزيز">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="employeeType" class="form-label">جنسية الموظف</label>
+                            <select id="employeeType" class="form-select">
+                                <option value="" selected disabled>اختر جنسية الموظف</option>
+                                <option value="سعودي">سعودي</option>
+                                <option value="غير سعودي">غير سعودي</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="contractType" class="form-label">نوع العقد</label>
+                            <select id="contractType" class="form-select">
+                                <option value="" selected disabled>اختر نوع العقد</option>
+                                <option value="محدد المدة">محدد المدة</option>
+                                <option value="غير محدد المدة">غير محدد المدة</option>
+                            </select>
+                            <div class="small-hint mt-1">
+                                يؤثر نوع العقد على حساب المكافأة حسب نظام العمل السعودي.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="terminationReason" class="form-label">سبب إنهاء العلاقة التعاقدية</label>
+                            <select id="terminationReason" class="form-select">
+                                <option value="" selected disabled>اختر السبب</option>
+                                <option value="استقالة">استقالة</option>
+                                <option value="انتهاء عقد">انتهاء عقد</option>
+                                <option value="فصل غير مشروع">فصل بسبب غير مشروع</option>
+                                <option value="فصل مشروع">فصل بسبب مشروع</option>
+                            </select>
+                            <div class="small-hint mt-1">
+                                في حالة الاستقالة يتم تطبيق نسب المادة 85 (ثلث، ثلثين، كامل المكافأة).
+                            </div>
+                        </div>
+
+                        <!-- تواريخ العمل -->
+                        <div class="col-md-6">
+                            <label for="startDate" class="form-label">تاريخ بداية العمل</label>
+                            <input type="date" id="startDate" class="form-control">
+                            <div class="small-hint mt-1">
+                                يُستخدم لحساب مدة الخدمة تلقائياً.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="endDate" class="form-label">آخر يوم في العمل</label>
+                            <input type="date" id="endDate" class="form-control">
+                            <div class="small-hint mt-1">
+                                يُستخدم لحساب مدة الخدمة الدقيقة.
+                            </div>
+                        </div>
+
+                        <!-- بيانات الأجر -->
+                        <div class="col-md-4">
+                            <label for="basicSalary" class="form-label">الراتب الأساسي الشهري (ر.س)</label>
+                            <input type="number" min="0" step="0.01" id="basicSalary" class="form-control" placeholder="مثال: 20000">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="allowances" class="form-label">البدلات الثابتة (ر.س)</label>
+                            <input type="number" min="0" step="0.01" id="allowances" class="form-control" placeholder="مثال: 3000">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="insuranceDeduction" class="form-label">حسم التأمينات (ر.س)</label>
+                            <input type="number" min="0" step="0.01" id="insuranceDeduction" class="form-control" placeholder="مثال: 500">
+                            <div class="small-hint mt-1">
+                                حسم التأمينات الاجتماعية من الراتب.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="totalSalary" class="form-label">إجمالي الأجر الشهري (يُحسب آلياً)</label>
+                            <input type="number" id="totalSalary" class="form-control" readonly>
+                            <div class="small-hint mt-1">
+                                إجمالي الأجر = الراتب الأساسي + البدلات الثابتة.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="salaryAfterInsurance" class="form-label">الأجر بعد حسم التأمينات (ر.س)</label>
+                            <input type="number" id="salaryAfterInsurance" class="form-control" readonly>
+                            <div class="small-hint mt-1">
+                                الأجر الشهري بعد خصم التأمينات.
+                            </div>
+                        </div>
+
+                        <!-- مدة الخدمة -->
+                        <div class="col-md-4">
+                            <label for="serviceYears" class="form-label">مدة الخدمة (بالسنوات)</label>
+                            <input type="number" min="0" step="0.25" id="serviceYears" class="form-control" placeholder="مثال: 5.5">
+                            <div class="small-hint mt-1">
+                                يمكن استخدام كسور السنة (مثل 5.5 تعني 5 سنوات و6 أشهر).
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="unusedLeaveDays" class="form-label">أيام الإجازة السنوية المستحقة (اختياري)</label>
+                            <input type="number" min="0" step="1" id="unusedLeaveDays" class="form-control" placeholder="مثال: 10">
+                            <div class="small-hint mt-1">
+                                يتم احتسابها على أساس الأجر اليومي (اختياري).
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="notes" class="form-label">ملاحظات داخلية (اختياري)</label>
+                            <input type="text" id="notes" class="form-control" placeholder="مثال: عقد محدد المدة">
+                        </div>
+
+                        <!-- أزرار -->
+                        <div class="col-12 d-flex flex-wrap gap-2 mt-3">
+                            <button type="submit" class="btn btn-seec">
+                                <i class="fa-solid fa-calculator"></i>
+                                احسب واحفظ العملية
+                            </button>
+                            <button type="button" class="btn btn-outline-seec no-print" id="btn-clear-form">
+                                مسح المدخلات
+                            </button>
+                            <button type="button" class="btn btn-outline-seec ms-auto no-print" onclick="window.print()">
+                                <i class="fa-solid fa-file-pdf"></i>
+                                طباعة / حفظ PDF
+                            </button>
+                        </div>
+
+                        <div class="col-12 small-hint mt-3">
+                            تنبيه: هذه الأداة تقديرية ولا تغني عن الرجوع للجهات المختصة أو المستشار القانوني.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- النتائج -->
+        <div class="col-lg-5">
+            <div class="results-box mb-3">
+                <h3 class="mb-3"><i class="fa-solid fa-receipt"></i> النتائج الحالية</h3>
+
+                <div class="mb-2">
+                    <span class="fw-semibold">الأجر الشهري المستخدم:</span>
+                    <div class="result-value" id="result-monthly-wage">—</div>
+                </div>
+
+                <div class="mb-2">
+                    <span class="fw-semibold">مكافأة نهاية الخدمة التقديرية:</span>
+                    <div class="result-value" id="result-eos">—</div>
+                </div>
+
+                <div class="mb-2">
+                    <span class="fw-semibold">مكافأة الإجازة السنوية (إن وُجدت):</span>
+                    <div class="result-value" id="result-leave">—</div>
+                </div>
+
+                <div class="mb-2">
+                    <span class="fw-semibold">الإجمالي الكلي المستحق:</span>
+                    <div class="result-value" id="result-total">—</div>
+                </div>
+
+                <hr>
+
+                <div class="mb-1 small-hint" id="result-details">
+                    أدخل البيانات ثم اضغط "احسب واحفظ العملية" لعرض تفاصيل الاحتساب.
+                </div>
+
+                <!-- أيقونات التقييم السريع -->
+                <div id="quickRatingSection" class="mt-3 pt-3 border-top" style="display: none;">
+                    <p class="small-hint mb-2">هل ساعدتك النتيجة؟</p>
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary quick-rating-btn" data-rating="helpful" title="مفيد جداً">
+                            <i class="fa-solid fa-thumbs-up"></i> مفيد
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary quick-rating-btn" data-rating="notHelpful" title="غير مفيد">
+                            <i class="fa-solid fa-thumbs-down"></i> غير مفيد
+                        </button>
+                        <a href="about.html#feedbackForm" class="btn btn-sm btn-outline-info">
+                            <i class="fa-solid fa-comment"></i> ملاحظة
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-section no-print">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="section-title mb-0">روابط مفيدة</span>
+                    </div>
+                    <ul class="mb-0 small-hint">
+                        <li>للاطلاع على ملخص الإحصائيات لجميع العمليات المحفوظة، يمكنك زيارة صفحة
+                            <a href="stats.html">لوحة الإحصائيات</a>.
+                        </li>
+                        <li>للتعرف على منطق الاحتساب بالتفصيل والافتراضات، زر صفحة
+                            <a href="about.html">عن الأداة</a>.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- جدول السجل -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card card-section">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="section-title">سجل العمليات المحفوظة</span>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-sm btn-outline-seec no-print" id="btn-refresh-history">
+                                <i class="fa-solid fa-arrows-rotate"></i> تحديث
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger no-print" id="btn-clear-history">
+                                <i class="fa-solid fa-trash"></i> مسح الكل
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>اسم الموظف</th>
+                                    <th>جهة العمل</th>
+                                    <th>الجنسية</th>
+                                    <th>مدة الخدمة</th>
+                                    <th>الأجر الشهري</th>
+                                    <th>المكافأة</th>
+                                    <th>الإجمالي</th>
+                                    <th>التاريخ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-table">
+                                <tr>
+                                    <td colspan="9" class="text-center text-muted">لا يوجد أي عمليات محفوظة حتى الآن.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const HISTORY_KEY = 'kafaatazizHistory';
+
+    function toNumber(value) {
+        const n = Number(value);
+        return isNaN(n) ? 0 : n;
+    }
+
+    function formatCurrency(num) {
+        return num.toLocaleString('ar-SA', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2
+        }) + ' ر.س';
+    }
+
+    function formatNumber(num) {
+        return num.toLocaleString('ar-SA', {
+            maximumFractionDigits: 2
+        });
+    }
+
+    function formatDate(value) {
+        const d = new Date(value);
+        if (isNaN(d.getTime())) return '-';
+        return d.toLocaleString('ar-SA');
+    }
+
+    // حساب مدة الخدمة من التواريخ
+    function calculateServiceYears(startDate, endDate) {
+        if (!startDate || !endDate) return 0;
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const diffTime = Math.abs(end - start);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays / 365.25; // تحويل الأيام إلى سنوات
+    }
+
+    function loadHistory() {
+        try {
+            const raw = localStorage.getItem(HISTORY_KEY);
+            if (!raw) return [];
+            const parsed = JSON.parse(raw);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (e) {
+            console.error('خطأ في قراءة LocalStorage:', e);
+            return [];
+        }
+    }
+
+    function saveHistory(list) {
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(list));
+    }
+
+    function refreshHistoryTable() {
+        const history = loadHistory().slice().reverse(); // الأحدث أولاً
+        const tbody = document.getElementById('history-table');
+        tbody.innerHTML = '';
+
+        if (!history.length) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = '<td colspan="9" class="text-center text-muted">لا يوجد أي عمليات محفوظة حتى الآن.</td>';
+            tbody.appendChild(tr);
+            return;
+        }
+
+        history.forEach((record, idx) => {
+            const tr = document.createElement('tr');
+
+            const salary = toNumber(record.totalMonthlySalary) || (
+                toNumber(record.basicSalary) + toNumber(record.allowances)
+            );
+            const years = toNumber(record.serviceYears) || toNumber(record.yearsOfService);
+            const eos = toNumber(record.endOfServiceReward) || toNumber(record.totalReward) || toNumber(record.totalBenefits);
+            const total = toNumber(record.totalAmount);
+
+            tr.innerHTML = `
+                <td>${idx + 1}</td>
+                <td>${record.employeeName || '-'}</td>
+                <td>${record.employerName || '-'}</td>
+                <td>${record.employeeType || '-'}</td>
+                <td>${years ? formatNumber(years) : '-'}</td>
+                <td>${salary ? formatCurrency(salary) : '-'}</td>
+                <td>${eos ? formatCurrency(eos) : '-'}</td>
+                <td>${total ? formatCurrency(total) : '-'}</td>
+                <td>${record.createdAt ? formatDate(record.createdAt) : '-'}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function updateTotalSalary() {
+        const basic = toNumber(document.getElementById('basicSalary').value);
+        const allowances = toNumber(document.getElementById('allowances').value);
+        const insurance = toNumber(document.getElementById('insuranceDeduction').value);
+        
+        const total = basic + allowances;
+        const afterInsurance = total - insurance;
+        
+        document.getElementById('totalSalary').value = total ? total.toFixed(2) : '';
+        document.getElementById('salaryAfterInsurance').value = afterInsurance > 0 ? afterInsurance.toFixed(2) : '';
+    }
+
+    // حساب مكافأة نهاية الخدمة بناءً على نظام العمل السعودي
+    function calculateEndOfServiceReward(monthlyWage, years, terminationReason, employeeType, contractType) {
+        if (years <= 0 || monthlyWage <= 0) return 0;
+
+        // المادة 84: نصف أجر شهري عن كل سنة في الخمس الأولى + أجر شهري عن كل سنة بعدها
+        const firstPartYears = Math.min(years, 5);
+        const remainingYears = Math.max(years - 5, 0);
+
+        let baseReward = (monthlyWage / 2) * firstPartYears + (monthlyWage) * remainingYears;
+
+        // المادة 85: الاستقالة (ثلث، ثلثين، كامل المكافأة حسب مدة الخدمة)
+        if (terminationReason === 'استقالة') {
+            if (years < 2) {
+                baseReward = 0;
+            } else if (years >= 2 && years < 5) {
+                baseReward = baseReward / 3;
+            } else if (years >= 5 && years < 10) {
+                baseReward = (baseReward * 2) / 3;
+            } else {
+                // 10 سنوات فأكثر: كامل المكافأة
+            }
+        }
+
+        // المادة 87: معاملة خاصة للعاملين السعوديين في حالات معينة
+        // هنا يمكن إضافة منطق إضافي إذا كانت هناك فروقات قانونية
+        if (employeeType === 'سعودي') {
+            // تطبيق أحكام خاصة للسعوديين إن وجدت
+        } else if (employeeType === 'غير سعودي') {
+            // تطبيق أحكام خاصة لغير السعوديين إن وجدت
+        }
+
+        // معاملة العقود محددة المدة
+        if (contractType === 'محدد المدة') {
+            // قد تكون هناك معاملة مختلفة للعقود محددة المدة
+        }
+
+        return baseReward;
+    }
+
+    document.getElementById('basicSalary').addEventListener('input', updateTotalSalary);
+    document.getElementById('allowances').addEventListener('input', updateTotalSalary);
+    document.getElementById('insuranceDeduction').addEventListener('input', updateTotalSalary);
+
+    // حساب مدة الخدمة من التواريخ
+    document.getElementById('startDate').addEventListener('change', function() {
+        const startDate = this.value;
+        const endDate = document.getElementById('endDate').value;
+        if (startDate && endDate) {
+            const years = calculateServiceYears(startDate, endDate);
+            document.getElementById('serviceYears').value = years.toFixed(2);
+        }
+    });
+
+    document.getElementById('endDate').addEventListener('change', function() {
+        const startDate = document.getElementById('startDate').value;
+        const endDate = this.value;
+        if (startDate && endDate) {
+            const years = calculateServiceYears(startDate, endDate);
+            document.getElementById('serviceYears').value = years.toFixed(2);
+        }
+    });
+
+    document.getElementById('btn-clear-form').addEventListener('click', function () {
+        document.getElementById('calculatorForm').reset();
+        document.getElementById('totalSalary').value = '';
+        document.getElementById('salaryAfterInsurance').value = '';
+        document.getElementById('result-monthly-wage').textContent = '—';
+        document.getElementById('result-eos').textContent = '—';
+        document.getElementById('result-leave').textContent = '—';
+        document.getElementById('result-total').textContent = '—';
+        document.getElementById('result-details').textContent =
+            'أدخل البيانات ثم اضغط "احسب واحفظ العملية" لعرض تفاصيل الاحتساب.';
+    });
+
+    document.getElementById('btn-clear-history').addEventListener('click', function () {
+        if (!confirm('هل أنت متأكد من مسح جميع العمليات المحفوظة؟ لا يمكن التراجع عن هذا الإجراء.')) return;
+        localStorage.removeItem(HISTORY_KEY);
+        refreshHistoryTable();
+    });
+
+    document.getElementById('btn-refresh-history').addEventListener('click', refreshHistoryTable);
+
+    document.getElementById('calculatorForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const employeeName = document.getElementById('employeeName').value.trim() || 'غير محدد';
+        const employerName = document.getElementById('employerName').value.trim() || 'غير محدد';
+        const employeeType = document.getElementById('employeeType').value;
+        const contractType = document.getElementById('contractType').value;
+        const terminationReason = document.getElementById('terminationReason').value;
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+
+        const basicSalary = toNumber(document.getElementById('basicSalary').value);
+        const allowances = toNumber(document.getElementById('allowances').value);
+        const insuranceDeduction = toNumber(document.getElementById('insuranceDeduction').value);
+        const totalSalaryInput = toNumber(document.getElementById('totalSalary').value);
+        const salaryAfterInsurance = toNumber(document.getElementById('salaryAfterInsurance').value);
+        const monthlyWage = totalSalaryInput || (basicSalary + allowances);
+
+        const serviceYears = toNumber(document.getElementById('serviceYears').value);
+        const unusedLeaveDays = toNumber(document.getElementById('unusedLeaveDays').value);
+        const notes = document.getElementById('notes').value.trim();
+
+        if (!employeeType || !contractType || !terminationReason || !monthlyWage || !serviceYears) {
+            alert('الرجاء تعبئة جنسية الموظف، نوع العقد، سبب الإنهاء، الأجر الشهري ومدة الخدمة على الأقل.');
+            return;
+        }
+
+        // حساب مكافأة نهاية الخدمة
+        const eosReward = calculateEndOfServiceReward(monthlyWage, serviceYears, terminationReason, employeeType, contractType);
+
+        // حساب الإجازة السنوية إن وُجدت
+        const dailyWage = monthlyWage / 30;
+        const leaveComp = unusedLeaveDays > 0 ? dailyWage * unusedLeaveDays : 0;
+
+        const totalAmount = eosReward + leaveComp;
+
+        // عرض النتائج في الواجهة
+        document.getElementById('result-monthly-wage').textContent = monthlyWage ? formatCurrency(monthlyWage) : '0 ر.س';
+        document.getElementById('result-eos').textContent = eosReward ? formatCurrency(eosReward) : '0 ر.س';
+        document.getElementById('result-leave').textContent = leaveComp ? formatCurrency(leaveComp) : '0 ر.س';
+        document.getElementById('result-total').textContent = totalAmount ? formatCurrency(totalAmount) : '0 ر.س';
+
+        document.getElementById('result-details').innerHTML =
+            `تم الاحتساب على أساس أجر شهري مقداره <strong>${formatCurrency(monthlyWage)}</strong>، ومدة خدمة قدرها
+             <strong>${formatNumber(serviceYears)} سنة</strong>، مع تطبيق المادة 84 من نظام العمل، 
+             ولاحقاً المادة 85 في حالة الاستقالة. العقد من نوع: <strong>${contractType}</strong>، والموظف: <strong>${employeeType}</strong>. هذه نتيجة تقديرية وليست ملزمة قانونياً.`;
+
+        // حفظ في LocalStorage بتنسيق متوافق مع stats.html
+        const history = loadHistory();
+
+        const record = {
+            employeeName,
+            employerName,
+            employeeType,
+            contractType,
+            terminationReason,
+            startDate,
+            endDate,
+            basicSalary,
+            allowances,
+            insuranceDeduction,
+            totalMonthlySalary: monthlyWage,
+            salaryAfterInsurance,
+            serviceYears,
+            unusedLeaveDays,
+            dailyWage,
+            baseReward: eosReward,
+            endOfServiceReward: eosReward,
+            leaveCompensation: leaveComp,
+            totalAmount,
+            notes,
+            createdAt: new Date().toISOString()
+        };
+
+        history.push(record);
+        saveHistory(history);
+        refreshHistoryTable();
+
+        // إظهار قسم التقييم
+        showQuickRating();
+    });
+
+    // تحميل السجل عند فتح الصفحة
+    refreshHistoryTable();
+
+    // معالجة التقييم السريع
+    const QUICK_RATING_KEY = 'kafaatazizQuickRating';
+
+    document.querySelectorAll('.quick-rating-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const rating = this.dataset.rating;
+            const record = {
+                rating: rating,
+                timestamp: new Date().toISOString()
+            };
+
+            let ratings = [];
+            try {
+                const raw = localStorage.getItem(QUICK_RATING_KEY);
+                if (raw) ratings = JSON.parse(raw);
+            } catch (e) {
+                console.error('خطأ في قراءة التقييمات:', e);
+            }
+
+            ratings.push(record);
+            localStorage.setItem(QUICK_RATING_KEY, JSON.stringify(ratings));
+
+            // تغيير لون الزر المضغوط
+            document.querySelectorAll('.quick-rating-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            this.style.backgroundColor = 'var(--seec-green)';
+            this.style.color = 'white';
+            this.style.borderColor = 'var(--seec-green)';
+
+            setTimeout(() => {
+                alert('شكراً للتقييم! رأيك مهم لنا.');
+            }, 300);
+        });
+    });
+
+    // إظهار قسم التقييم بعد الحساب
+    function showQuickRating() {
+        document.getElementById('quickRatingSection').style.display = 'block';
+    }
+
+</script>
+
+</body>
+</html>
